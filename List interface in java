@@ -25,3 +25,10 @@
   
   **Points 4 and 5 return -1 if the specified object is not present.
   
+  6.
+  l1.subList(starting index,ending index)
+  e.g.
+  l1.subList(1,3) will return sublist from 1(inclusive) to 3(exclusive).
+  
+  7.
+  
