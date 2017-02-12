@@ -1,0 +1,24 @@
+SOME INBUILT METHODS OF THIS INTERFACE:
+
+THE METHODS OF THIS INTERFACE ARE IMPLEMENTED BELOW USING ARRAY LIST
+boolean is the return type-true or falsei.e whether the operation was performed successfully or not.
+1.
+boolean add(object)   -> adds an object at the end of array list
+2.
+boolean addAll(Collection)-> adds all the object present in that arraylist.
+for e.g.
+ArrayList l1=a,b,c,d
+ArrayList l = k,l
+
+l.addAll(l1) - will convert l to k,l,a,b,c,d
+
+3.
+boolean remove(object)- removes the specified object.
+4.
+boolean removeAll(Collection) -> removes whole of the collection from the arraylist
+5.
+boolean retainAll(Collection) -> deletes all elements except those preent in that collection.
+
+6. l1.size() -> returns size of the array list
+7. l1.clear() -> clears the array list
+8. boolean isEmpty() -> tells whether the array list is empty or not.
