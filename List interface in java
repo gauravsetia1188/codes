@@ -1,0 +1,27 @@
+  Collections interface is extended by List interface;so apart from supporting all the methods of  Collections interface,
+  it has some of its own methods also as mentioned below.
+  
+  Implemented below using ArrayList class.
+  
+  1.
+  l1.add(2,s); // s is object name
+  will insert s at position 2 and shift all the elements present on its right side by one position to the right.
+  
+  2.
+  l1.set(2,s); // s is object name
+  will replace element present at index 2 with s (no shifting will be there).
+  
+  3.
+  l1.get(2,s); // s is object name
+  returns element present at index 2.
+  
+  4.
+  l1.indexOf(s);
+  returs index of s
+  
+  5.
+  l1.lastIndexOf(s);
+  returs index of last occurence of s.
+  
+  **Points 4 and 5 return -1 if the specified object is not present.
+  
