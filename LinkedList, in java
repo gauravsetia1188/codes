@@ -1,0 +1,15 @@
+It extends features of List and Collection interface and has some of its own methods as well, as defined below:
+  
+ // Linked list
+  
+void addFirst();
+void addLast();
+Object getFirst();
+Object getLast();
+Object removeFirst();
+Object removeLast();
+
+
+plus you can see additional functions at oracle documentary.
+
+
