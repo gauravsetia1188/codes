@@ -1,0 +1,49 @@
+import java.util.*;
+import java.lang.*;
+import java.io.*;
+
+class NGE{
+    
+    public void Find(int a[])
+    {
+        Stack<Integer> s=new Stack<Integer>();
+        s.push(a[0]);
+        for(int i=1;i<a.length;i++)
+        {
+            if(!s.empty())
+           {
+               while(s.size()>0 )
+            {
+                if(s.peek()<a[i])
+               { System.out.println(s.peek() + "-->" + a[i]);
+                s.pop();}
+                else
+                break;
+            }
+               
+           }
+            s.push(a[i]);
+        }
+        while(s.size()>0)
+        {
+            System.out.println(s.peek() + "-->" + "-1");
+            s.pop();
+        }
+    }
+}
+
+class Main
+{
+	public static void main (String[] args) throws java.lang.Exception
+	{
+	Scanner sc=new Scanner(System.in);
+	int n=sc.nextInt();
+	int arr[]=new int[n];
+	for(int i=0;i<n;i++)
+	{
+	    arr[i]=sc.nextInt();
+	}
+	NGE obj=new NGE();
+	obj.Find(arr);
+	}
+}
