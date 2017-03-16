@@ -1,0 +1,2 @@
+Hashtable is thread safe unlike hashmap.
+Hashtable doesnt allow "null" value as a key whereas hashmap does.
