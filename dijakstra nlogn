@@ -1,0 +1,113 @@
+#include<bits/stdc++.h>
+using namespace std;
+#define ll long long
+#define temp 0
+#define perm 1
+#define NIL -1
+#define infinity 1000000000
+
+vector < pair<ll int,ll int> > arr[100001];
+map <pair<ll int,ll int>,ll int> m;
+ll int predecessor[100001];
+ll int pathlength[100001];
+ll int status[100001];
+ll int v;
+ll int sum;
+void create_graph()
+{
+    ll int edges,s,d,w; //source,destination,weight
+    cin>>v>>edges;
+    for(ll int i=0;i<edges;i++)
+    {
+        cin>>s>>d>>w;
+        s--;d--;
+        sum=sum+w;
+        arr[s].push_back(make_pair(d,w));
+        arr[d].push_back(make_pair(s,w));
+
+    }
+
+}
+
+
+ll int min_temp()
+{
+    ll int mini=infinity;
+    ll int k=NIL;
+    for(ll int i=0;i<v;i++)
+    {
+        if(status[i]==temp && pathlength[i]<mini)
+        {
+         k=i;
+
+         mini=pathlength[i];
+        }
+    }
+    return k;
+}
+
+void dijkastra(ll int s)
+{
+    ll int i,current;
+   for( i=0;i<v;i++)
+   {
+       status[i]=temp;
+       predecessor[i]=NIL;
+       pathlength[i]=infinity;
+   }
+   priority_queue < pair<ll,ll> , vector < pair<ll,ll> > , greater < pair<ll,ll> > > pq;
+   pq.push(make_pair(0,s));
+   pathlength[s]=0;
+   while(!pq.empty())
+   {
+       current=pq.top().second;
+        pq.pop();
+        if(current!=0)
+        {
+            m[make_pair(current,predecessor[current])]=1;
+             m[make_pair(predecessor[current],current)]=1;
+        }
+       status[current]=perm;
+       for(i=0;i<arr[current].size();i++)
+       {
+           if((status[arr[current][i].first]==temp))
+           {
+               if(pathlength[current] + arr[current][i].second  <  pathlength[arr[current][i].first])
+               {
+                   predecessor[arr[current][i].first]=current;
+                   pathlength[arr[current][i].first]=pathlength[current] + arr[current][i].second;
+                   pq.push(make_pair(pathlength[arr[current][i].first],arr[current][i].first));
+               }
+           }
+       }
+
+   }
+}
+
+
+
+int main()
+{
+    create_graph();
+    ll int source=0;
+    dijkastra(source);
+    ll int red=0;
+    for(ll int i=0;i<v;i++)
+    {
+        for(ll int j=0;j<arr[i].size();j++)
+        {
+            if(m[make_pair(i,arr[i][j].first)]==0)
+                arr[i][j].second=abs(pathlength[i]-pathlength[arr[i][j].first]);
+        }
+    }
+     for(ll int i=0;i<v;i++)
+    {
+        for(ll int j=0;j<arr[i].size();j++)
+        {
+
+                red+=arr[i][j].second;
+        }
+    }
+    cout<<red/2<<endl;
+    return 0;
+}
