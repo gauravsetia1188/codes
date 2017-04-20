@@ -1,0 +1,107 @@
+#include<bits/stdc++.h>
+using namespace std;
+#define ll long long
+int segtree[100000];
+int lazytree[100000];
+
+void create_tree(int arr[],int low,int high,int pos){
+    
+    if(low==high)
+    {
+        segtree[low]=arr[pos]
+        return;
+    }
+    
+    int mid=(low+high)>>1;
+    create_tree(arr,low,mid,(2*pos)+1);
+    create_tree(arr,mid+1,high,(2*pos)+2);
+    segtree[pos]=min(segtree[(2*pos)+1],segtree[(2*pos)+2]);
+}
+
+
+int range_query(int arr[],int low,int high,int qlow,int qhigh,int pos)
+{
+    if(qhigh<low || qlow>high) // no overlap
+        return INT_MAX;
+    
+    
+    if(lazy[pos]!=0)
+    {
+        segtree[pos]+=lazy[pos];
+        
+        if(low!=high)
+        {
+            lazy[(2*pos)+1]+=lazy[pos];
+            lazy[(2*pos)+2]+=lazy[pos];
+        }
+        lazy[pos]=0;
+    }
+    
+    
+    
+    if(qlow<=low || qhigh>=high) //total overlap
+        return segtree[pos];
+        
+    int mid=(low+high)>>1;
+    
+    return min(range_query(arr,low,mid,qlow,qhigh,(2*pos)+1) , range_query(arr,mid+1,high,qlow,qhigh,(2*pos)+2));
+}
+
+
+void update(int arr[],int low,int high,int qlow,int qhigh,int pos,int value){
+    
+    if(lazy[pos]!=0)
+    {
+        segtree[pos]+=lazy[pos];
+        
+        if(low!=high)
+        {
+            lazy[(2*pos)+1]+=lazy[pos];
+            lazy[(2*pos)+2]+=lazy[pos];
+        }
+        lazy[pos]=0;
+    }
+    
+    if(qhigh<low || qlow>high) // no overlap
+        return;
+        
+    if(qlow<=low || qhigh>=high) //total overlap
+        {
+            segtree[pos]+=lazy[pos];
+        
+            if(low!=high)
+            {
+                lazy[(2*pos)+1]+=value;
+                lazy[(2*pos)+2]+=value;
+            }
+            return;
+        }
+    
+    int mid=(low+high)>>1;
+    range_query(arr,low,mid,qlow,qhigh,(2*pos)+1);
+    range_query(arr,mid+1,high,qlow,qhigh,(2*pos)+2);
+    segtree[pos]=min(segtree[(2*pos)+1] , segtree[(2*pos)+2]);
+}
+
+
+
+
+int main()
+{
+    int n;
+    cin>>n;
+    int arr[n+1];
+    
+    for(int i=0;i<n;i++)
+    {
+        cin>>arr[i];
+    }
+    
+    create_tree(arr,0,n-1,0);
+    int x;
+    x=range_query(arr,0,n-1,2,4,0);
+    cout<<x<<endl;
+    update(arr,0,n-1,2,4,0,3);
+    cout<<x<<endl;
+    return 0;
+}
