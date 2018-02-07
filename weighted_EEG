@@ -39,7 +39,7 @@ int main() {
         for(int j=0;j<v[i].size();j++) {
             float value = arr[v[i][j]] - arr[i];
             value/=(v[i][j]-i);
-            cout<<i<<"-> "<<v[i][j]<<" ";
+            cout<<i+1<<"-> "<<v[i][j]+1<<" ";
             cout<<"value is "<<abs(atan(value))<<endl;
         }
     }
