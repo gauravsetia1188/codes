@@ -1,0 +1,56 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+map<int,int> voteCount;
+int k;
+
+priority_queue<pair<int,int>, vector<int>, greater<int>> pq;
+
+// vote_candidate(int id)
+// getTopK
+
+// 1. min heap of size k.
+// 2. compare with min element and if freq is more, remove min and add that particular element.
+
+
+
+void checkAndAddInHeap(int id) {
+    
+    if(pq.size()<k) {
+        pq.add(make_pair(voteCount[id], id));
+        cout<<"element with id::"<<id<<"added in heap"<<endl;
+        return;
+    }
+    
+    pair<int,int> top = pq.top();
+    
+    if(top.first<voteCount[id]) {
+        pq.pop();
+        pq.add(make_pair(voteCount[id], id));
+    }
+        
+}
+
+
+void vote_candidate(int id) {
+    
+    voteCount[id]+=1;
+    checkAndAddInHeap(id);
+    
+}
+
+int main() {
+    
+    cin>>k;
+    // 1 for vote, 2 for status
+    int query_type;
+    cin>>query_type;
+    
+    if(query_type == 1) {
+        int id;
+        cin>>id;
+        vote_candidate(id);
+        
+    }
+	
+}
