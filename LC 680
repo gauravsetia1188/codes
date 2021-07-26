@@ -1,0 +1,29 @@
+class Solution {
+public:
+    
+    bool recurse(int i, int j, string s, int k) {
+        
+       if(k<0)
+           return false;
+        
+        if(i>=j)
+            return true;
+        
+        if(s[i]==s[j])
+            return recurse(i+1,j-1,s,k);
+        
+        return recurse(i+1,j,s,k-1) || recurse(i,j-1,s,k-1);
+        
+        
+    }
+    
+    
+    
+    bool validPalindrome(string s) {
+        
+        int k = 1;
+        
+        return recurse(0,s.size()-1, s, k);
+        
+    }
+};
